@@ -3,7 +3,10 @@ import { connectDB } from "./ConnectDB/DB.js";
 import cors from "cors";
 import UserRouter from "./Routers/User/UserRouter.js";
 import NavbarRouter from "./Routers/Navbar/NavbarRouter.js";
-import DataByUserIdRouter from "./Routers/DataByUserId/DataByUserIdRouter.js";
+import {
+  DataByUserIdRouter,
+  EditImageRouter,
+} from "./Routers/DataByUserId/DataByUserIdRouter.js";
 
 const app = express();
 //Middelwares
@@ -13,8 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 
 //Router
 app.use("/create-new-user", UserRouter);
+app.use("/get-user", UserRouter);
 app.use("/create-links", NavbarRouter);
 app.use("/links", DataByUserIdRouter);
+app.use("/edit-image", EditImageRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
