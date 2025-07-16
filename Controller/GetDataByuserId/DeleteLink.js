@@ -26,7 +26,7 @@ export const DeleteLink = async (req, res) => {
     const [LinksResult] = await DB.promise().query(Query, Value);
     const Links = JSON.parse(LinksResult[0]?.Links || "[]");
 
-    if (!Links.some((link) => link.name === linkValue.linkName)) {
+    if (!Links.some((link) => link.name === linkNameValue.linkName)) {
       return res.status(404).json({
         statusbar: "error",
         message: "Link not found.",
