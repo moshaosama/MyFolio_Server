@@ -1,7 +1,16 @@
 import express from "express";
 import { connectDB } from "./ConnectDB/DB.js";
+import cors from "cors";
+import UserRouter from "./Routers/User/UserRouter.js";
 
 const app = express();
+//Middelwares
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
+//Router
+app.use("/create-new-user", UserRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
