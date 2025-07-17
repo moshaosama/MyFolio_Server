@@ -20,13 +20,18 @@ export const Edittags = async (req, res) => {
     }
 
     const Query = "UPDATE user SET Tags = ? WHERE id = ?";
-    const Value = [TagsValue.Tags, userIdValue.userId];
+    const Value = [JSON.stringify(TagsValue.Tags), userIdValue.userId];
 
     await DB.promise().query(Query, Value);
 
+    const QueryGetUser = "SELECT * FROM user WHERE id = ?";
+    const ValueGetUser = [userIdValue.userId];
+
+    const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
+
     return res.status(200).json({
       statusbar: "success",
-      message: "Updated Successfully",
+      user: result,
     });
   } catch (err) {
     return res.status(500).json({
