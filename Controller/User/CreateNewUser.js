@@ -3,8 +3,11 @@ import { CreateLinks } from "../Navbar/CreateLinks.js";
 
 export const CreateNewUser = async (req, res) => {
   try {
-    const Query = "INSERT INTO user (Name) VALUES (?)";
-    const Value = ["Mohamed Osama"];
+    const Query = "INSERT INTO user (Name, Bio) VALUES (?, ?)";
+    const Value = [
+      "Mohamed Osama",
+      "👨‍💻Full Stack Developer with expertise in React.js, React Native, Node.js & MongoDB. Passionate about building performant, scalable apps that solve real business needs.🏆 Experienced in AJAX, React Query, Express, and writing clean, maintainable code.🌱",
+    ];
 
     const [resultCraete] = await DB.promise().query(Query, Value);
 
