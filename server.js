@@ -5,6 +5,7 @@ import UserRouter from "./Routers/User/UserRouter.js";
 import NavbarRouter from "./Routers/Navbar/NavbarRouter.js";
 import {
   DataByUserIdRouter,
+  EditBioRouter,
   EditImageRouter,
   EditNameRouter,
   EditTagsRouter,
@@ -24,6 +25,7 @@ app.use("/links", DataByUserIdRouter);
 app.use("/edit-image", EditImageRouter);
 app.use("/edit-tags", EditTagsRouter);
 app.use("/edit-name", EditNameRouter);
+app.use("/edit-bio", EditBioRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
