@@ -6,6 +6,7 @@ import NavbarRouter from "./Routers/Navbar/NavbarRouter.js";
 import {
   DataByUserIdRouter,
   EditImageRouter,
+  EditNameRouter,
   EditTagsRouter,
 } from "./Routers/DataByUserId/DataByUserIdRouter.js";
 
@@ -22,6 +23,7 @@ app.use("/create-links", NavbarRouter);
 app.use("/links", DataByUserIdRouter);
 app.use("/edit-image", EditImageRouter);
 app.use("/edit-tags", EditTagsRouter);
+app.use("/edit-name", EditNameRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
