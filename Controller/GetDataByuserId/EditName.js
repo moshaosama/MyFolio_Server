@@ -20,12 +20,12 @@ export const EditName = async (req, res) => {
       });
     }
 
-    const Query = "UPDATE user SET Name = ? WHERE id = ?";
+    const Query = "UPDATE account SET Name = ? WHERE id = ?";
     const Value = [NameValue.Name, userIdValue.userId];
 
     await DB.promise().query(Query, Value);
 
-    const QueryGetUser = "SELECT * FROM user WHERE id = ?";
+    const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userIdValue.userId];
 
     const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
