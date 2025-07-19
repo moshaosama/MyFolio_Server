@@ -19,12 +19,12 @@ export const EditBio = async (req, res) => {
       });
     }
 
-    const EditQuery = "UPDATE user SET Bio = ? WHERE id = ?";
+    const EditQuery = "UPDATE account SET Bio = ? WHERE id = ?";
     const EditValue = [BioValue.Bio, userIdValue.userId];
 
     await DB.promise().query(EditQuery, EditValue);
 
-    const QueryGetUser = "SELECT * FROM user WHERE id = ?";
+    const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userIdValue.userId];
 
     const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
