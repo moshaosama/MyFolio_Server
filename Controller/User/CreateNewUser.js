@@ -4,7 +4,7 @@ import { DefaultSkills } from "../../Constant/Skills.js";
 export const CreateNewUser = async (req, res) => {
   try {
     const Query =
-      "INSERT INTO user (Name, Bio, ResumeLink ,GitHubLink ,LinkedInLink ,TwitterLink,MediumLink) VALUES (?, ? ,? ,? ,? ,? ,? )";
+      "INSERT INTO account (Name, Bio, ResumeLink ,GitHubLink ,LinkedInLink ,TwitterLink,MediumLink) VALUES (?, ? ,? ,? ,? ,? ,? )";
     const Value = [
       "Mohamed Osama",
       "👨‍💻Full Stack Developer with expertise in React.js, React Native, Node.js & MongoDB. Passionate about building performant, scalable apps that solve real business needs.🏆 Experienced in AJAX, React Query, Express, and writing clean, maintainable code.🌱",
@@ -17,7 +17,7 @@ export const CreateNewUser = async (req, res) => {
 
     const [resultCraete] = await DB.promise().query(Query, Value);
 
-    const UserQuery = "SELECT * FROM user WHERE id = ?";
+    const UserQuery = "SELECT * FROM account WHERE id = ?";
     const [valueUser] = [resultCraete.insertId];
 
     const [resultGet] = await DB.promise().query(UserQuery, valueUser);
