@@ -38,6 +38,18 @@ export const CreateNewUser = async (req, res) => {
     for (let i = 0; i <= 2; i++) {
       await DB.promise().query(QueryCreateProject, ValueCreateProject);
     }
+
+    const QueryCreateSkill =
+      "INSERT INTO skills (skills, image_skill ,user_id) VALUES (?,?,?)";
+
+    await DefaultSkills.map((skill) =>
+      DB.promise().query(QueryCreateSkill, [
+        skill.name,
+        "",
+        resultCraete.insertId,
+      ])
+    );
+
     return res.status(200).json({
       statusbar: "success",
       message: "Created Successfully",
