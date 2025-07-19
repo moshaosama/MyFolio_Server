@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(dotenv.config({ path: ".env" }));
+dotenv.config({ path: ".env" });
 
 //Router
 app.use("/create-new-user", UserRouter);
