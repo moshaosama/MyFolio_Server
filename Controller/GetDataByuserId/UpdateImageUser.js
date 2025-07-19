@@ -20,7 +20,7 @@ export const UpdateImageUser = async (req, res) => {
         message: "Data is required",
       });
     }
-    const Query = "UPDATE user SET image = ? WHERE id = ?";
+    const Query = "UPDATE account SET image = ? WHERE id = ?";
     const Value = [ImageValue.imageName, UserIdValue.userId];
 
     await DB.promise().query(Query, Value);
