@@ -1,14 +1,15 @@
 import mysql from "mysql2";
 import express from "express";
+import dotenv from "dotenv";
+
 const app = express();
-app.use(dotenv.config({ path: ".env" }));
+dotenv.config({ path: ".env" });
 
 const DB = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_DATABASE || "myfolio",
-  //   port: process.env.MYSQLPORT || 3306,
 });
 
 export const connectDB = () => {
