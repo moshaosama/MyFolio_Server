@@ -2,7 +2,7 @@ import mysql from "mysql2";
 import dotenv from "dotenv";
 dotenv.config({ path: ".env" });
 
-const DB = mysql.createPool({
+const DB = mysql.createConnection({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
@@ -12,9 +12,9 @@ const DB = mysql.createPool({
 export const connectDB = () => {
   DB.connect((err) => {
     if (err) {
-      console.log("Error connecting to the database", err);
+      console.log("Error connecting to DB", err);
     } else {
-      console.log("Connected to the database");
+      console.log("Connected to DB");
     }
   });
 };
