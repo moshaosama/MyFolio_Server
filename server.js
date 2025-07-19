@@ -30,6 +30,8 @@ app.use("/edit-name", EditNameRouter);
 app.use("/edit-bio", EditBioRouter);
 app.use("/edit-links", EditLinksRouter);
 app.use("/get-projects", ProjectRouter);
+app.use("/create-projects", ProjectRouter);
+app.use("/delete-project", ProjectRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
