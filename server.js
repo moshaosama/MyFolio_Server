@@ -3,6 +3,7 @@ import { connectDB } from "./ConnectDB/DB.js";
 import cors from "cors";
 import UserRouter from "./Routers/User/UserRouter.js";
 import NavbarRouter from "./Routers/Navbar/NavbarRouter.js";
+import dotenv from "dotenv";
 import {
   DataByUserIdRouter,
   EditBioRouter,
@@ -19,6 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(dotenv.config({ path: ".env" }));
 
 //Router
 app.use("/create-new-user", UserRouter);
