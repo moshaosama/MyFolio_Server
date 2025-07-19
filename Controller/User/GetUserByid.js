@@ -12,7 +12,7 @@ export const GetUserId = async (req, res) => {
       });
     }
 
-    const Query = "SELECT * FROM user WHERE id = ?";
+    const Query = "SELECT * FROM account WHERE id = ?";
     const Value = [value.userId];
 
     const [result] = await DB.promise().query(Query, Value);
