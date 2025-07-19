@@ -19,12 +19,12 @@ export const Edittags = async (req, res) => {
       });
     }
 
-    const Query = "UPDATE user SET Tags = ? WHERE id = ?";
+    const Query = "UPDATE account SET Tags = ? WHERE id = ?";
     const Value = [JSON.stringify(TagsValue.Tags), userIdValue.userId];
 
     await DB.promise().query(Query, Value);
 
-    const QueryGetUser = "SELECT * FROM user WHERE id = ?";
+    const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userIdValue.userId];
 
     const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
