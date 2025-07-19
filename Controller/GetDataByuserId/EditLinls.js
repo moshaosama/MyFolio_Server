@@ -12,12 +12,12 @@ export const EdtiLinks = async (req, res) => {
       return res.status(400).json({ message: "No valid fields provided" });
     }
 
-    const Query = `UPDATE user SET ${Object.keys(Link)[0]} = ?  WHERE id = ?`;
+    const Query = `UPDATE account SET ${Object.keys(Link)[0]} = ?  WHERE id = ?`;
     const Value = [Object.values(Link)[0], userId];
 
     await DB.promise().query(Query, Value);
 
-    const QueryGetUser = "SELECT * FROM user WHERE id = ?";
+    const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userId];
 
     const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
