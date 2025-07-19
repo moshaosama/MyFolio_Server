@@ -11,6 +11,7 @@ import {
   EditNameRouter,
   EditTagsRouter,
 } from "./Routers/DataByUserId/DataByUserIdRouter.js";
+import ProjectRouter from "./Routers/Projects/ProjectRouter.js";
 
 const app = express();
 //Middelwares
@@ -28,6 +29,7 @@ app.use("/edit-tags", EditTagsRouter);
 app.use("/edit-name", EditNameRouter);
 app.use("/edit-bio", EditBioRouter);
 app.use("/edit-links", EditLinksRouter);
+app.use("/get-projects", ProjectRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
