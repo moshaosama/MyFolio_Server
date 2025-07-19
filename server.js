@@ -7,6 +7,7 @@ import {
   DataByUserIdRouter,
   EditBioRouter,
   EditImageRouter,
+  EditLinksRouter,
   EditNameRouter,
   EditTagsRouter,
 } from "./Routers/DataByUserId/DataByUserIdRouter.js";
@@ -26,6 +27,7 @@ app.use("/edit-image", EditImageRouter);
 app.use("/edit-tags", EditTagsRouter);
 app.use("/edit-name", EditNameRouter);
 app.use("/edit-bio", EditBioRouter);
+app.use("/edit-links", EditLinksRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
