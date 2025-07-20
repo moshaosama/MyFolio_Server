@@ -1,4 +1,5 @@
 import DB from "../../ConnectDB/DB.js";
+import { DefaultExperience } from "../../Constant/Experience.js";
 import { DefaultSkills } from "../../Constant/Skills.js";
 
 export const CreateNewUser = async (req, res) => {
@@ -49,6 +50,33 @@ export const CreateNewUser = async (req, res) => {
         resultCraete.insertId,
       ])
     );
+
+    const QueryCreateContact =
+      "INSERT INTO contact (Email, Phone, Location , user_id) VALUES (?,?,?,?)";
+
+    const ValueCreateContact = [
+      "mohamedOSFekry@gmail",
+      "+20 1004365707",
+      "Giza, Egypt",
+      resultCraete.insertId,
+    ];
+
+    await DB.promise().query(QueryCreateContact, ValueCreateContact);
+
+    const QueryCreateExperience =
+      "INSERT INTO experience (Date,Title,Foundation,Description,Icon,Position,user_id) VALUES (?,?,?,?,?,?,?)";
+
+    DefaultExperience?.map(async (experience) => {
+      await DB.promise().query(QueryCreateExperience, [
+        experience.Date,
+        experience.Title,
+        experience.Foundation,
+        experience.Description,
+        experience.Icon,
+        experience.Position,
+        resultCraete.insertId,
+      ]);
+    });
 
     return res.status(200).json({
       statusbar: "success",
