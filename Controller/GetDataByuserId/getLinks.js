@@ -17,8 +17,8 @@ export const GetLinks = async (req, res) => {
     const Query = `
                 SELECT * 
                 FROM account 
-                INNER JOIN navbar ON user.id = navbar.user_id 
-                WHERE user.id = ?
+                INNER JOIN navbar ON account.id = navbar.user_id 
+                WHERE account.id = ?
                 `;
     const Value = [value.userId];
 
