@@ -14,6 +14,7 @@ import {
 } from "./Routers/DataByUserId/DataByUserIdRouter.js";
 import ProjectRouter from "./Routers/Projects/ProjectRouter.js";
 import skillsRouter from "./Routers/Skills/SkillsRouter.js";
+import contactRouter from "./Routers/Contact/ContactRouter.js";
 
 const app = express();
 //Middelwares
@@ -37,6 +38,10 @@ app.use("/create-projects", ProjectRouter);
 app.use("/delete-project", ProjectRouter);
 app.use("/edit-project", ProjectRouter);
 app.use("/get-skills", skillsRouter);
+app.use("/delete-skill", skillsRouter);
+app.use("/create-skill", skillsRouter);
+app.use("/get-contact", contactRouter);
+app.use("/edit-contact", contactRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
