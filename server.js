@@ -1,5 +1,5 @@
 import express from "express";
-import { connectDB } from "./ConnectDB/DB.js";
+import DB, { connectDB } from "./ConnectDB/DB.js";
 import cors from "cors";
 import UserRouter from "./Routers/User/UserRouter.js";
 import NavbarRouter from "./Routers/Navbar/NavbarRouter.js";
@@ -24,6 +24,16 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: ".env" });
 app.use("/uploads", express.static("uploads"));
+
+setInterval(() => {
+  DB.query("SELECT 1", (err) => {
+    if (err) {
+      console.error("MySQL Keep-Alive Failed:", err.message);
+    } else {
+      console.log("MySQL Keep-Alive Ping sent");
+    }
+  });
+}, 5 * 60 * 1000);
 
 //Router
 app.use("/create-new-user", UserRouter);
