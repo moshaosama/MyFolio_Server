@@ -52,7 +52,7 @@ export const CreateNewUser = async (req, res) => {
     );
 
     const QueryCreateContact =
-      "INSERT INTO contact (Email, Phone, Location , user_id) VALUES (?,?,?,?)";
+      "INSERT INTO contact_us (Email, Phone, Location , user_id) VALUES (?,?,?,?)";
 
     const ValueCreateContact = [
       "mohamedOSFekry@gmail",
