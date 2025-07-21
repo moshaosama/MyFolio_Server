@@ -45,6 +45,7 @@ app.use("/get-contact", contactRouter);
 app.use("/edit-contact", contactRouter);
 app.use("/get-experience", ExperineceRouter);
 app.use("/create-experience", ExperineceRouter);
+app.use("/delete-experience", ExperineceRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
