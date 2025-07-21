@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: ".env" });
+app.use("/uploads", express.static("uploads"));
 
 //Router
 app.use("/create-new-user", UserRouter);
