@@ -1,5 +1,6 @@
 import DB from "../../ConnectDB/DB.js";
 import { DefaultExperience } from "../../Constant/Experience.js";
+import { defaultNavbarLinks } from "../../Constant/NavbarLinks.js";
 import { DefaultSkills } from "../../Constant/Skills.js";
 
 export const CreateNewUser = async (req, res) => {
@@ -17,6 +18,14 @@ export const CreateNewUser = async (req, res) => {
     ];
 
     const [resultCraete] = await DB.promise().query(Query, Value);
+
+    const CreatLinkQuery = "INSERT INTO navbar (Links, user_id) VALUES (?, ?)";
+    const CreatrLinkValue = [
+      JSON.stringify(defaultNavbarLinks),
+      resultCraete.insertId,
+    ];
+
+    await DB.promise().query(CreatLinkQuery, CreatrLinkValue);
 
     const UserQuery = "SELECT * FROM account WHERE id = ?";
     const [valueUser] = [resultCraete.insertId];
