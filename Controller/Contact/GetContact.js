@@ -11,7 +11,7 @@ export const GetContact = async (req, res) => {
       });
     }
 
-    const Query = "SELECT * FROM contact WHERE user_id = ?";
+    const Query = "SELECT * FROM contact_us WHERE user_id = ?";
     const Value = [value.userId];
 
     const [result] = await DB.promise().query(Query, Value);
