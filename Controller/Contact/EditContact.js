@@ -11,7 +11,7 @@ export const EditContact = async (req, res) => {
       });
     }
 
-    const Query = `UPDATE contact SET ${
+    const Query = `UPDATE contact_us SET ${
       Object.keys(body)[0]
     } = ? WHERE user_id = ?`;
     const Value = [Object.values(body)[0], body.user_id];
