@@ -20,6 +20,11 @@ export const CreateLinks = async (req, res) => {
     const Value = [JSON.stringify(defaultNavbarLinks), value.userId];
 
     await DB.promise().query(Query, Value);
+
+    return res.status(200).json({
+      statusbar: "success",
+      message: "Links updated successfully",
+    });
   } catch (err) {
     return res.status(500).json({
       statusbar: "error",
