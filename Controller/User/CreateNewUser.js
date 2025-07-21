@@ -43,12 +43,14 @@ export const CreateNewUser = async (req, res) => {
     const QueryCreateSkill =
       "INSERT INTO skills (skills, image_skill ,user_id) VALUES (?,?,?)";
 
-    await DefaultSkills.map((skill) =>
-      DB.promise().query(QueryCreateSkill, [
-        skill.name,
-        "",
-        resultCraete.insertId,
-      ])
+    await Promise.all(
+      DefaultSkills.map((skill) =>
+        DB.promise().query(QueryCreateSkill, [
+          skill.name,
+          "",
+          resultCraete.insertId,
+        ])
+      )
     );
 
     const QueryCreateContact =
@@ -66,17 +68,19 @@ export const CreateNewUser = async (req, res) => {
     const QueryCreateExperience =
       "INSERT INTO experience (Date,Title,Foundation,Description,Icon,Position,user_id) VALUES (?,?,?,?,?,?,?)";
 
-    DefaultExperience?.map(async (experience) => {
-      await DB.promise().query(QueryCreateExperience, [
-        experience.Date,
-        experience.Title,
-        experience.Foundation,
-        experience.Description,
-        experience.Icon,
-        experience.Position,
-        resultCraete.insertId,
-      ]);
-    });
+    await Promise.all(
+      DefaultExperience.map((experience) =>
+        DB.promise().query(QueryCreateExperience, [
+          experience.Date,
+          experience.Title,
+          experience.Foundation,
+          experience.Description,
+          experience.Icon,
+          experience.Position,
+          resultCraete.insertId,
+        ])
+      )
+    );
 
     return res.status(200).json({
       statusbar: "success",
