@@ -1,5 +1,5 @@
 import express from "express";
-import DB, { connectDB } from "./ConnectDB/DB.js";
+import DB from "./ConnectDB/DB.js";
 import cors from "cors";
 import UserRouter from "./Routers/User/UserRouter.js";
 import NavbarRouter from "./Routers/Navbar/NavbarRouter.js";
@@ -60,5 +60,4 @@ app.use("/delete-experience", ExperineceRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
-  connectDB();
 });
