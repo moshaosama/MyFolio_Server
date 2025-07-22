@@ -10,17 +10,33 @@ export const SendMessage = async (req, res) => {
     const { value, error } = ChatSchema.validate(req.body);
 
     if (error) {
-      return res.status(404).json({
+      return res.status(400).json({
         statusbar: "error",
-        message: "Data is required",
+        message: "Invalid data",
       });
     }
 
-    if (value.message === "My Name is") {
+    const { message, session } = value;
+
+    if (message.startsWith("My Name is ")) {
+      const name = message.slice("My Name is ".length);
+
       return res.status(200).json({
         statusbar: "success",
-        message: `Hello ${value.message.slice(11)}`,
+        message: `Hello ${name}, nice to meet you!`,
       });
     }
-  } catch (err) {}
+
+    // لو مفيش اسم
+    return res.status(200).json({
+      statusbar: "success",
+      message:
+        "I'm still learning. Can you try saying your name like 'My Name is Mohamed'?",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      statusbar: "error",
+      message: err.message || "Server error",
+    });
+  }
 };
