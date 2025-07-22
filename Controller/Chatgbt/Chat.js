@@ -32,10 +32,11 @@ export const SendMessage = async (req, res) => {
     }
 
     const { message, session } = value;
+    const matchedPhrase = DefaultMessages.find((prefix) =>
+      message.startsWith(prefix)
+    );
 
-    if (
-      message.startsWith(DefaultMessages.filter((el) => el.message === message))
-    ) {
+    if (matchedPhrase) {
       const name = message.slice(
         DefaultMessages.filter((el) => el.message === message).length
       );
