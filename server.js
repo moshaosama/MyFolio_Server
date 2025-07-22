@@ -26,15 +26,15 @@ app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: ".env" });
 app.use("/uploads", express.static("uploads"));
 
-// setInterval(() => {
-//   DB.query("SELECT 1", (err) => {
-//     if (err) {
-//       console.error("MySQL Keep-Alive Failed:", err.message);
-//     } else {
-//       console.log("MySQL Keep-Alive Ping sent");
-//     }
-//   });
-// }, 5 * 60 * 1000);
+setInterval(() => {
+  DB.query("SELECT 1", (err) => {
+    if (err) {
+      console.error("MySQL Keep-Alive Failed:", err.message);
+    } else {
+      console.log("MySQL Keep-Alive Ping sent");
+    }
+  });
+}, 5 * 60 * 1000);
 
 //Router
 app.use("/create-new-user", UserRouter);
