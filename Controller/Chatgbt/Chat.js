@@ -47,11 +47,17 @@ export const SendMessage = async (req, res) => {
       const Query = "UPDATE account SET Name = ? WHERE id = ?";
       const Value = [name, user_id];
 
+      const QueryGetUser = "SELECT * FROM account WHERE id = ?";
+      const ValueGetUser = [user_id];
+
+      const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
+
       await DB.promise().query(Query, Value);
 
       return res.status(200).json({
         statusbar: "success",
         message: `Hello ${name}, nice to meet you!`,
+        user: result,
       });
     }
 
