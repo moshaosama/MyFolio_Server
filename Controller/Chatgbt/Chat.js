@@ -5,6 +5,21 @@ const ChatSchema = Joi.object({
   session: Joi.string().required(),
 });
 
+const DefaultMessages = [
+  {
+    message: "My Name s",
+  },
+  {
+    message: "Name is",
+  },
+  {
+    message: "",
+  },
+  {
+    message: "is",
+  },
+];
+
 export const SendMessage = async (req, res) => {
   try {
     const { value, error } = ChatSchema.validate(req.body);
@@ -18,8 +33,12 @@ export const SendMessage = async (req, res) => {
 
     const { message, session } = value;
 
-    if (message.startsWith("My Name is ")) {
-      const name = message.slice("My Name is ".length);
+    if (
+      message.startsWith(DefaultMessages.filter((el) => el.message === message))
+    ) {
+      const name = message.slice(
+        DefaultMessages.filter((el) => el.message === message).length
+      );
 
       return res.status(200).json({
         statusbar: "success",
@@ -27,11 +46,9 @@ export const SendMessage = async (req, res) => {
       });
     }
 
-    // لو مفيش اسم
     return res.status(200).json({
       statusbar: "success",
-      message:
-        "I'm still learning. Can you try saying your name like 'My Name is Mohamed'?",
+      message: "I'm still learning. what’s your name?",
     });
   } catch (err) {
     return res.status(500).json({
