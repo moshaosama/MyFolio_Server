@@ -6,18 +6,11 @@ const ChatSchema = Joi.object({
 });
 
 const DefaultMessages = [
-  {
-    message: "My Name s",
-  },
-  {
-    message: "Name is",
-  },
-  {
-    message: "",
-  },
-  {
-    message: "is",
-  },
+  { message: "My name is " },
+  { message: "Name is " },
+  { message: "I am " },
+  { message: "I'm " },
+  { message: "is " },
 ];
 
 export const SendMessage = async (req, res) => {
@@ -32,14 +25,20 @@ export const SendMessage = async (req, res) => {
     }
 
     const { message, session } = value;
+
     const matchedPhrase = DefaultMessages.find((prefix) =>
-      message.startsWith(prefix)
+      message.startsWith(prefix.message)
     );
 
     if (matchedPhrase) {
-      const name = message.slice(
-        DefaultMessages.filter((el) => el.message === message).length
-      );
+      const name = message.slice(matchedPhrase.message.length).trim();
+
+      if (!name) {
+        return res.status(200).json({
+          statusbar: "success",
+          message: "I didn’t catch your name. Could you repeat it?",
+        });
+      }
 
       return res.status(200).json({
         statusbar: "success",
@@ -49,7 +48,7 @@ export const SendMessage = async (req, res) => {
 
     return res.status(200).json({
       statusbar: "success",
-      message: "I'm still learning. what’s your name?",
+      message: "I'm still learning. What’s your name?",
     });
   } catch (err) {
     return res.status(500).json({
