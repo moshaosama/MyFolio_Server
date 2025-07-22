@@ -16,6 +16,7 @@ import ProjectRouter from "./Routers/Projects/ProjectRouter.js";
 import skillsRouter from "./Routers/Skills/SkillsRouter.js";
 import contactRouter from "./Routers/Contact/ContactRouter.js";
 import ExperineceRouter from "./Routers/Experience/experienceRouter.js";
+import chatgbtRouter from "./Routers/Chatgbt/ChatgbtRouter.js";
 
 const app = express();
 //Middelwares
@@ -57,7 +58,7 @@ app.use("/edit-contact", contactRouter);
 app.use("/get-experience", ExperineceRouter);
 app.use("/create-experience", ExperineceRouter);
 app.use("/delete-experience", ExperineceRouter);
-app.use("/start-chat", ExperineceRouter);
+app.use("/start-chat", chatgbtRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
