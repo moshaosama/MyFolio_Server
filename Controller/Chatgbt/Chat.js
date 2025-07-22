@@ -1,8 +1,10 @@
 import Joi from "joi";
+import DB from "../../ConnectDB/DB.js";
 
 const ChatSchema = Joi.object({
   message: Joi.string().required(),
   session: Joi.string().required(),
+  user_id: Joi.number().required(),
 });
 
 const DefaultMessages = [
@@ -24,10 +26,12 @@ export const SendMessage = async (req, res) => {
       });
     }
 
-    const { message, session } = value;
+    const { message, session, user_id } = value;
+
+    const cleanedMessage = message.trim().toLowerCase();
 
     const matchedPhrase = DefaultMessages.find((prefix) =>
-      message.startsWith(prefix.message)
+      cleanedMessage.startsWith(prefix.message.toLowerCase())
     );
 
     if (matchedPhrase) {
@@ -39,6 +43,11 @@ export const SendMessage = async (req, res) => {
           message: "I didn’t catch your name. Could you repeat it?",
         });
       }
+
+      const Query = "UPDATE account SET Name = ? WHERE id = ?";
+      const Value = [name, user_id];
+
+      await DB.promise().query(Query, Value);
 
       return res.status(200).json({
         statusbar: "success",
