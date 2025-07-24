@@ -13,7 +13,7 @@ export const DeleteExperience = async (req, res) => {
     const Query = "DELETE FROM experience WHERE id = ?";
     const Value = [value.experience_id];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
