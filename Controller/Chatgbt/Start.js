@@ -8,7 +8,7 @@ export const StartChat = async (req, res) => {
     const Query = "INSERT INTO chatgbt (session_id) VALUES (?)";
     const Value = [sessionId];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
