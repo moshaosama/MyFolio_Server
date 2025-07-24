@@ -18,24 +18,19 @@ export const CreateNewUser = async (req, res) => {
       "https://medium.com/@mohamedosfekry",
     ];
 
-    const [resultCraete] = await DB.promise().query(Query, Value);
+    const [resultCraete] = await DB.query(Query, Value);
 
-    const CreatLinkQuery = "INSERT INTO navbar (Links, user_id) VALUES (?, ?)";
-    const CreatrLinkValue = [
+    await DB.query("INSERT INTO navbar (Links, user_id) VALUES (?, ?)", [
       JSON.stringify(defaultNavbarLinks),
       resultCraete.insertId,
-    ];
+    ]);
 
-    await DB.promise().query(CreatLinkQuery, CreatrLinkValue);
-
-    const UserQuery = "SELECT * FROM account WHERE id = ?";
-    const [valueUser] = [resultCraete.insertId];
-
-    const [resultGet] = await DB.promise().query(UserQuery, valueUser);
+    const [resultGet] = await DB.query("SELECT * FROM account WHERE id = ?", [
+      resultCraete.insertId,
+    ]);
 
     const QueryCreateProject =
       "INSERT INTO projects (image, title, description,githubLink,liveDemoLink,user_id) VALUES (?,?,?,?,?,?)";
-
     const ValueCreateProject = [
       "",
       "CategYou - YouTube Playlist Organizer",
@@ -46,20 +41,21 @@ export const CreateNewUser = async (req, res) => {
     ];
 
     for (let i = 0; i <= 2; i++) {
-      const [insertProject] = await DB.promise().query(
+      const [insertProject] = await DB.query(
         QueryCreateProject,
         ValueCreateProject
       );
-
       const QueryCreateSkillProject =
         "INSERT INTO skill_project (skill_name, project_id) VALUES (?, ?)";
 
-      Skill_Project.map(async (skill) => {
-        await DB.query(QueryCreateSkillProject, [
-          skill.name,
-          insertProject.insertId,
-        ]);
-      });
+      await Promise.all(
+        Skill_Project.map((skill) =>
+          DB.query(QueryCreateSkillProject, [
+            skill.name,
+            insertProject.insertId,
+          ])
+        )
+      );
     }
 
     const QueryCreateSkill =
@@ -67,32 +63,26 @@ export const CreateNewUser = async (req, res) => {
 
     await Promise.all(
       DefaultSkills.map((skill) =>
-        DB.promise().query(QueryCreateSkill, [
-          skill.name,
-          "",
-          resultCraete.insertId,
-        ])
+        DB.query(QueryCreateSkill, [skill.name, "", resultCraete.insertId])
       )
     );
 
-    const QueryCreateContact =
-      "INSERT INTO contact_us (Email, Phone, Location , user_id) VALUES (?,?,?,?)";
-
-    const ValueCreateContact = [
-      "mohamedOSFekry@gmail",
-      "+20 1004365707",
-      "Giza, Egypt",
-      resultCraete.insertId,
-    ];
-
-    await DB.promise().query(QueryCreateContact, ValueCreateContact);
+    await DB.query(
+      "INSERT INTO contact_us (Email, Phone, Location , user_id) VALUES (?,?,?,?)",
+      [
+        "mohamedOSFekry@gmail",
+        "+20 1004365707",
+        "Giza, Egypt",
+        resultCraete.insertId,
+      ]
+    );
 
     const QueryCreateExperience =
       "INSERT INTO experience (Date,Title,Foundation,Description,Icon,Position,user_id) VALUES (?,?,?,?,?,?,?)";
 
     await Promise.all(
       DefaultExperience.map((experience) =>
-        DB.promise().query(QueryCreateExperience, [
+        DB.query(QueryCreateExperience, [
           experience.Date,
           experience.Title,
           experience.Foundation,
@@ -112,7 +102,7 @@ export const CreateNewUser = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       statusbar: "error",
-      message: err,
+      message: err.message || err.toString(),
     });
   }
 };
