@@ -15,12 +15,12 @@ export const EdtiLinks = async (req, res) => {
     const Query = `UPDATE account SET ${Object.keys(Link)[0]} = ?  WHERE id = ?`;
     const Value = [Object.values(Link)[0], userId];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userId];
 
-    const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
+    const [result] = await DB.query(QueryGetUser, ValueGetUser);
 
     return res.status(200).json({
       statusbar: "success",
