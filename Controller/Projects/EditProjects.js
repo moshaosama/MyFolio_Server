@@ -29,7 +29,7 @@ export const EditProjects = async (req, res) => {
 
     const Value = [title, description, githubLink, liveDemoLink, project_id];
 
-    const [result] = await DB.promise().query(Query, Value);
+    const [result] = await DB.query(Query, Value);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({
