@@ -18,7 +18,7 @@ export const DeleteProject = async (req, res) => {
     const Query = "DELETE FROM projects WHERE id = ? ";
     const Value = [value.project_id];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
