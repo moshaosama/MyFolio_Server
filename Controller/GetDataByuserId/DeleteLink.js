@@ -23,7 +23,7 @@ export const DeleteLink = async (req, res) => {
     const Query = "SELECT * FROM navbar WHERE user_id = ?";
     const Value = [userValue.userId];
 
-    const [LinksResult] = await DB.promise().query(Query, Value);
+    const [LinksResult] = await DB.query(Query, Value);
     const Links = JSON.parse(LinksResult[0]?.Links || "[]");
 
     if (!Links.some((link) => link.name === linkNameValue.linkName)) {
@@ -43,7 +43,7 @@ export const DeleteLink = async (req, res) => {
       userValue.userId,
     ];
 
-    await DB.promise().query(UpdatedLinksQuery, UpdatedLinksValue);
+    await DB.query(UpdatedLinksQuery, UpdatedLinksValue);
 
     return res.status(200).json({
       statusbar: "success",
