@@ -5,6 +5,7 @@ import { DeleteProject } from "../../Controller/Projects/DeleteProject.js";
 import { EditProjects } from "../../Controller/Projects/EditProjects.js";
 import { GetSkillProject } from "../../Controller/Projects/getSkillProject.js";
 import { DeleteSkillProject } from "../../Controller/Projects/useDeleteSkillProject.js";
+import { CreateSkillProject } from "../../Controller/Projects/CreateSkillProject.js";
 
 const ProjectRouter = express.Router();
 
@@ -12,5 +13,6 @@ ProjectRouter.route("/:userId").get(GetProjects).post(CreateProject);
 ProjectRouter.route("/:project_id").delete(DeleteProject).put(EditProjects);
 ProjectRouter.route("/skills/:project_id").get(GetSkillProject);
 ProjectRouter.route("/skills/:skillProject_id").delete(DeleteSkillProject);
+ProjectRouter.route("/").post(CreateSkillProject);
 
 export default ProjectRouter;
