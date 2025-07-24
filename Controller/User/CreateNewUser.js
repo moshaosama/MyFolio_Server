@@ -1,6 +1,7 @@
 import DB from "../../ConnectDB/DB.js";
 import { DefaultExperience } from "../../Constant/Experience.js";
 import { defaultNavbarLinks } from "../../Constant/NavbarLinks.js";
+import { Skill_Project } from "../../Constant/skill_projects.js";
 import { DefaultSkills } from "../../Constant/Skills.js";
 
 export const CreateNewUser = async (req, res) => {
@@ -45,7 +46,20 @@ export const CreateNewUser = async (req, res) => {
     ];
 
     for (let i = 0; i <= 2; i++) {
-      await DB.promise().query(QueryCreateProject, ValueCreateProject);
+      const [insertProject] = await DB.promise().query(
+        QueryCreateProject,
+        ValueCreateProject
+      );
+
+      const QueryCreateSkillProject =
+        "INSERT INTO skill_project (skill_name, project_id) VALUES (?, ?)";
+
+      Skill_Project.map(async (skill) => {
+        await DB.query(QueryCreateSkillProject, [
+          skill.name,
+          insertProject.insertId,
+        ]);
+      });
     }
 
     const QueryCreateSkill =
