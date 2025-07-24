@@ -14,7 +14,7 @@ export const GetContact = async (req, res) => {
     const Query = "SELECT * FROM contact_us WHERE user_id = ?";
     const Value = [value.userId];
 
-    const [result] = await DB.promise().query(Query, Value);
+    const [result] = await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
