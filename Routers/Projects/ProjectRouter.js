@@ -8,9 +8,7 @@ import { GetSkillProject } from "../../Controller/Projects/getSkillProject.js";
 const ProjectRouter = express.Router();
 
 ProjectRouter.route("/:userId").get(GetProjects).post(CreateProject);
-ProjectRouter.route("/:project_id")
-  .delete(DeleteProject)
-  .put(EditProjects)
-  .get(GetSkillProject);
+ProjectRouter.route("/:project_id").delete(DeleteProject).put(EditProjects);
+ProjectRouter.route("/skills/:project_id").get(GetSkillProject);
 
 export default ProjectRouter;
