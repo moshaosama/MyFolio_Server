@@ -14,7 +14,7 @@ export const getSkills = async (req, res) => {
     const query = "SELECT * FROM skills WHERE user_id = ?";
     const Value = [value.userId];
 
-    const [result] = await DB.promise().query(query, Value);
+    const [result] = await DB.query(query, Value);
 
     return res.status(200).json({
       statusbar: "success",
