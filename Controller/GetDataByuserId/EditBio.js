@@ -22,12 +22,12 @@ export const EditBio = async (req, res) => {
     const EditQuery = "UPDATE account SET Bio = ? WHERE id = ?";
     const EditValue = [BioValue.Bio, userIdValue.userId];
 
-    await DB.promise().query(EditQuery, EditValue);
+    await DB.query(EditQuery, EditValue);
 
     const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userIdValue.userId];
 
-    const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
+    const [result] = await DB.query(QueryGetUser, ValueGetUser);
 
     return res.status(200).json({
       statusbar: "success",
