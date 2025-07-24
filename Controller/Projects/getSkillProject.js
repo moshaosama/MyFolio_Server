@@ -2,7 +2,7 @@ import DB from "../../ConnectDB/DB.js";
 
 export const GetSkillProject = async (req, res) => {
   try {
-    const project_id = req.params;
+    const { project_id } = req.params;
 
     const Query = "SELECT * FROM skill_project WHERE project_id  = ?";
 
