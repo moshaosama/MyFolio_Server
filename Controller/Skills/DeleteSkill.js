@@ -16,7 +16,7 @@ export const DeleteSkill = async (req, res) => {
     }
     const Query = "DELETE FROM skills WHERE id = ?";
     const Value = [value.skill_id];
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
