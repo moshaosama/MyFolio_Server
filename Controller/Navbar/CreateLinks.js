@@ -19,7 +19,7 @@ export const CreateLinks = async (req, res) => {
     const Query = "INSERT INTO navbar (Links, user_id) VALUES (?, ?)";
     const Value = [JSON.stringify(defaultNavbarLinks), value.userId];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
