@@ -2,7 +2,7 @@ import DB from "../../ConnectDB/DB.js";
 
 export const DeleteSkillProject = async (req, res) => {
   try {
-    const skillProject_id = req.params;
+    const { skillProject_id } = req.params;
 
     if (!skillProject_id) {
       return res.status(404).json({
