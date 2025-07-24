@@ -14,7 +14,7 @@ export const CreateSkill = async (req, res) => {
     const Query = "INSERT INTO skills (skills, user_id) VALUES (?,?)";
     const Value = [ValueSkills.skill_name, ValueUser.userId];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
