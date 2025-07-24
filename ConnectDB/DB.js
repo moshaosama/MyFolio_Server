@@ -1,26 +1,26 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise"; // لاحظ /promise
 import dotenv from "dotenv";
-dotenv.config({ path: ".env" });
+dotenv.config();
 
-const DB = mysql.createConnection({
+const DB = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_DATABASE || "myfolio",
-  port: process.env.DB_PORT || 3306,
+  port: Number(process.env.DB_PORT) || 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
 });
 
-export const connectDB = () => {
-  DB.connect((err) => {
-    if (err) {
-      console.log("Error connecting to DB", err);
-    } else {
-      console.log("Connected to DB");
-    }
-  });
+export const connectDB = async () => {
+  try {
+    const connection = await DB.getConnection();
+    console.log("Connected to DB, threadId:", connection.threadId);
+    connection.release();
+  } catch (err) {
+    console.error("Error connecting to DB", err);
+  }
 };
 
 export default DB;
