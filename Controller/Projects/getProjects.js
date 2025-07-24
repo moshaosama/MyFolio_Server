@@ -13,7 +13,7 @@ export const GetProjects = async (req, res) => {
     const Query = "SELECT * FROM projects WHERE user_id = ?";
     const Values = [value.userId];
 
-    const [result] = await DB.promise().query(Query, Values);
+    const [result] = await DB.query(Query, Values);
 
     return res.status(200).json({
       statusbar: "success",
