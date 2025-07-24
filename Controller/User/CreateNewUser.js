@@ -33,13 +33,12 @@ export const CreateNewUser = async (req, res) => {
     const [resultGet] = await DB.promise().query(UserQuery, valueUser);
 
     const QueryCreateProject =
-      "INSERT INTO projects (image, title, description,skills,githubLink,liveDemoLink,user_id) VALUES (?,?,?,?,?,?,?)";
+      "INSERT INTO projects (image, title, description,githubLink,liveDemoLink,user_id) VALUES (?,?,?,?,?,?)";
 
     const ValueCreateProject = [
       "",
       "CategYou - YouTube Playlist Organizer",
       "Transform your YouTube experience with nested folders, smart sorting, and intuitive drag-and-drop organization for your Liked Videos playlist.",
-      JSON.stringify(DefaultSkills),
       "https://github.com/moshaosama/MyFolio",
       "https://my-folio-iota-eight.vercel.app/",
       resultCraete.insertId,
