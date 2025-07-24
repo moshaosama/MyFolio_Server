@@ -24,7 +24,7 @@ export const CreateProject = async (req, res) => {
       value.userId,
     ];
 
-    await DB.promise().query(QueryCreateProject, ValueCreateProject);
+    await DB.query(QueryCreateProject, ValueCreateProject);
 
     return res.status(200).json({
       statusbar: "success",
