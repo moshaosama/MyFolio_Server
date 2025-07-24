@@ -4,13 +4,6 @@ import DB from "../../ConnectDB/DB.js";
 const ProjectSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
-  skills: Joi.array()
-    .items(
-      Joi.object({
-        name: Joi.string().required(),
-      })
-    )
-    .required(),
   githubLink: Joi.string().required(),
   liveDemoLink: Joi.string().required(),
 });
@@ -29,19 +22,12 @@ export const EditProjects = async (req, res) => {
   try {
     const Query = `
       UPDATE projects
-      SET title = ?, description = ?, skills = ?, githubLink = ?, liveDemoLink = ?
+      SET title = ?, description = ?, githubLink = ?, liveDemoLink = ?
       WHERE id = ?
     `;
-    const { title, description, skills, githubLink, liveDemoLink } = value;
+    const { title, description, githubLink, liveDemoLink } = value;
 
-    const Value = [
-      title,
-      description,
-      JSON.stringify(skills),
-      githubLink,
-      liveDemoLink,
-      project_id,
-    ];
+    const Value = [title, description, githubLink, liveDemoLink, project_id];
 
     const [result] = await DB.promise().query(Query, Value);
 
