@@ -19,12 +19,12 @@ export const UpdateImageUser = async (req, res) => {
     const Query = "UPDATE account SET image = ? WHERE id = ?";
     const Value = [imagePath, UserIdValue.userId];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     const QueryGetUser = "SELECT  * FROM account WHERE id = ?";
     const ValueGetUser = [UserIdValue.userId];
 
-    const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
+    const [result] = await DB.query(QueryGetUser, ValueGetUser);
 
     return res.status(200).json({
       statusbar: "success",
