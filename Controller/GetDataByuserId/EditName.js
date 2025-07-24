@@ -23,12 +23,12 @@ export const EditName = async (req, res) => {
     const Query = "UPDATE account SET Name = ? WHERE id = ?";
     const Value = [NameValue.Name, userIdValue.userId];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     const QueryGetUser = "SELECT * FROM account WHERE id = ?";
     const ValueGetUser = [userIdValue.userId];
 
-    const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
+    const [result] = await DB.query(QueryGetUser, ValueGetUser);
 
     return res.status(200).json({
       statusbar: "success",
