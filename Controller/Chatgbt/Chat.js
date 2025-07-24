@@ -1,19 +1,12 @@
 import Joi from "joi";
 import DB from "../../ConnectDB/DB.js";
+import { DefaultMessage } from "../../Constant/Messages.js";
 
 const ChatSchema = Joi.object({
   message: Joi.string().required(),
   session: Joi.string().required(),
   user_id: Joi.number().required(),
 });
-
-const DefaultMessages = [
-  { message: "My name is " },
-  { message: "Name is " },
-  { message: "I am " },
-  { message: "I'm " },
-  { message: "is " },
-];
 
 export const SendMessage = async (req, res) => {
   try {
@@ -29,13 +22,18 @@ export const SendMessage = async (req, res) => {
     const { message, session, user_id } = value;
 
     const cleanedMessage = message.trim().toLowerCase();
-
-    const matchedPhrase = DefaultMessages.find((prefix) =>
+    const matchedPhrase = DefaultMessage.Name.find((prefix) =>
       cleanedMessage.startsWith(prefix.message.toLowerCase())
     );
 
+    const BioMatchedPhase = DefaultMessage.Condition.find((phases) => {
+      cleanedMessage.startsWith(phases.phase.toLowerCase());
+    });
+
+    let name;
+
     if (matchedPhrase) {
-      const name = message.slice(matchedPhrase.message.length).trim();
+      name = message.slice(matchedPhrase.message.length).trim();
 
       if (!name) {
         return res.status(200).json({
@@ -53,9 +51,9 @@ export const SendMessage = async (req, res) => {
       await DB.promise().query(Query, Value);
 
       const [result] = await DB.promise().query(QueryGetUser, ValueGetUser);
-      return res.status(200).json({
+      res.status(200).json({
         statusbar: "success",
-        message: `Hello ${name}, nice to meet you!`,
+        message: `Hello ${name}, nice to meet you! Do you want to make any changes to your bio?`,
         user: result,
       });
     }
