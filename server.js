@@ -60,6 +60,7 @@ app.use("/create-experience", ExperineceRouter);
 app.use("/delete-experience", ExperineceRouter);
 app.use("/start-chat", chatgbtRouter);
 app.use("/get-skill-project", ProjectRouter);
+app.use("/delete-skill-project", ProjectRouter);
 
 app.listen(3000, () => {
   console.log("Connected on 3000 successfully");
