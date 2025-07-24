@@ -34,7 +34,7 @@ export const CreateExperience = async (req, res) => {
       UserValue?.userId,
     ];
 
-    await DB.promise().query(QueryCreateExperience, ValueCreateExperience);
+    await DB.query(QueryCreateExperience, ValueCreateExperience);
 
     return res.status(200).json({
       statusbar: "success",
