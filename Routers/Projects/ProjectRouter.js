@@ -10,8 +10,7 @@ const ProjectRouter = express.Router();
 
 ProjectRouter.route("/:userId").get(GetProjects).post(CreateProject);
 ProjectRouter.route("/:project_id").delete(DeleteProject).put(EditProjects);
-ProjectRouter.route("/skills/:project_id")
-  .get(GetSkillProject)
-  .delete(DeleteSkillProject);
+ProjectRouter.route("/skills/:project_id").get(GetSkillProject);
+ProjectRouter.route("/skills/:skillProject_id").delete(DeleteSkillProject);
 
 export default ProjectRouter;
