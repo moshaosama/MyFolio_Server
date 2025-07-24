@@ -16,7 +16,7 @@ export const EditContact = async (req, res) => {
     } = ? WHERE user_id = ?`;
     const Value = [Object.values(body)[0], body.user_id];
 
-    await DB.promise().query(Query, Value);
+    await DB.query(Query, Value);
 
     return res.status(200).json({
       statusbar: "success",
